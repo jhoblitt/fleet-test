@@ -1,0 +1,9 @@
+defaultNamespace: ingress-nginx
+helm:
+  chart: ingress-nginx
+  repo: https://kubernetes.github.io/ingress-nginx
+  version: v3.23.0
+  values:
+    controller.kind: DaemonSet
+    defaultBackend.replicaCount: 3
+    rbac.create: true
