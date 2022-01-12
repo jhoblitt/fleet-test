@@ -1,0 +1,13 @@
+---
+defaultNamespace: cattle-system
+helm:
+  chart: rancher
+  repo: https://releases.rancher.com/server-charts/stable
+  version: v2.6.3
+  values:
+    hostname: rancher-test.tu.lsst.org
+    ingress:
+      tls:
+        source: secret
+      extraAnnotations:
+        "cert-manager.io/cluster-issuer": letsencrypt-staging
