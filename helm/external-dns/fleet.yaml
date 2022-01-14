@@ -5,12 +5,14 @@ helm:
   repo: https://kubernetes-sigs.github.io/external-dns/
   version: v1.7.1
   values:
-    interval: 5m
+    interval: 1m
     triggerLoopOnEvent: true
+    policy: sync
     extraArgs:
-      - --domain-filter=tu.lsst.org
+      - --zone-id-filter=$(HOSTED_ZONE_ID)
       - --aws-zone-type=public
       - --aws-zones-cache-duration=24h
+      - --txt-owner-id=zootzoot
     env:
     - name: AWS_ACCESS_KEY_ID
       valueFrom:
@@ -22,3 +24,8 @@ helm:
         secretKeyRef:
           name: external-dns-route53
           key: aws_secret_access_key
+    - name: HOSTED_ZONE_ID
+      valueFrom:
+        secretKeyRef:
+          name: external-dns-route53
+          key: hosted_zone_id
