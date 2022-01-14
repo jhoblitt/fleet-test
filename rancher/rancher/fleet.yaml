@@ -10,4 +10,5 @@ helm:
       tls:
         source: secret
       extraAnnotations:
-        "cert-manager.io/cluster-issuer": letsencrypt-staging
+        cert-manager.io/cluster-issuer: letsencrypt-staging
+        kubernetes.io/ingress.class: nginx
