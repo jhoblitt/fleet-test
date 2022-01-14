@@ -4,6 +4,7 @@ helm:
   chart: rancher
   repo: https://releases.rancher.com/server-charts/stable
   version: v2.6.3
+  force: true
   values:
     hostname: rancher-test.tu.lsst.org
     ingress:
