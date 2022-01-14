@@ -4,3 +4,21 @@ helm:
   chart: external-dns
   repo: https://kubernetes-sigs.github.io/external-dns/
   version: v1.7.1
+  values:
+    interval: 5m
+    triggerLoopOnEvent: true
+    extraArgs:
+      - --domain-filter=tu.lsst.org
+      - --aws-zone-type=public
+      - --aws-zones-cache-duration=24h
+    env:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: external-dns-route53
+          key: aws_access_key_id
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: external-dns-route53
+          key: aws_secret_access_key
